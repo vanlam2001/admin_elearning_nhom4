@@ -1,4 +1,3 @@
-import './App.css';
 import AdminLayout from './Layout/AdminLayout';
 
 function App() {

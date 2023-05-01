@@ -1,6 +1,9 @@
+
 import AdminLayout from "./Layout/AdminLayout";
 import { adminRoute } from "./routes/adminRoute";
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+
+import './App.css';
 
 function App() {
   return (

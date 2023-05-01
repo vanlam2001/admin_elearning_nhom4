@@ -15,7 +15,7 @@ const items = [
     getItem('Option 2', '2', <DesktopOutlined />),
 
 ];
-const AdminLayout = () => {
+const AdminLayout = ({ Componet }) => {
     const [collapsed, setCollapsed] = useState(false);
     const {
         token: { colorBgContainer },
@@ -63,7 +63,7 @@ const AdminLayout = () => {
                             background: colorBgContainer,
                         }}
                     >
-                        Bill is a cat.
+                        <Componet />
                     </div>
                 </Content>
                 <Footer

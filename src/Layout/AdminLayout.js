@@ -11,8 +11,8 @@ function getItem(label, key, icon, children) {
     };
 }
 const items = [
-    getItem('Option 1', '1', <PieChartOutlined />),
-    getItem('Option 2', '2', <DesktopOutlined />),
+    getItem('Người dùng', '1', <PieChartOutlined />),
+    getItem('Khóa học', '2', <DesktopOutlined />),
 
 ];
 const AdminLayout = ({ Componet }) => {

@@ -34,6 +34,12 @@ export const headerColums = [
         }
     },
 
+    {
+        title: "Chức năng",
+        dataIndex: "action",
+        key: "action",
+    }
+
 
 
 

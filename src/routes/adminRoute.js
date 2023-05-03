@@ -1,15 +1,15 @@
 import AdminLayout from "../Layout/AdminLayout";
-import AdminUserPage from "../Page/AdminUserPage/AdminUserPage";
+import AdminUsersPage from "../Page/AdminUserPage/AdminUserPage";
 
 export const adminRoute = [
     {
         url: "/admin-users",
-        component: <AdminLayout Componet={AdminUserPage}></AdminLayout>
+        component: <AdminLayout Componet={AdminUsersPage}></AdminLayout>
     },
 
     {
         url: "/",
-        component: <AdminLayout Componet={AdminUserPage}></AdminLayout>
+        component: <AdminLayout Componet={AdminUsersPage}></AdminLayout>
     },
 
 ]

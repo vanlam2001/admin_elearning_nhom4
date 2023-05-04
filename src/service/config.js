@@ -1,4 +1,5 @@
 import axios from "axios";
+import { localUserServ } from "./localService";
 
 
 export const BASE_URL = "https://elearningnew.cybersoft.edu.vn/";
@@ -8,7 +9,7 @@ const TokenCyberSoft = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJCb29
 export let configHeaders = () => {
     return {
         TokenCyberSoft: TokenCyberSoft,
-
+        ["Authorization"]: "Bearer " + localUserServ.get()?.accessToken,
     }
 }
 

@@ -9,11 +9,8 @@ export const adminServ = {
         return https.delete(`/api/QuanLyNguoiDung/XoaNguoiDung?TaiKhoan=${taiKhoan}`)
     },
 
-    updateUser: (data) => {
-        return https.post(`/api/QuanLyNguoiDung/CapNhatThongTinNguoiDung`, data)
+    getSearchUser: (keyword) => {
+        return https.get(`/api/QuanLyNguoiDung/TimKiemNguoiDung?MaNhom=GP01&tuKhoa=${keyword}`)
     }
-
-
-
 }
 

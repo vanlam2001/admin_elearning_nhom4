@@ -17,5 +17,4 @@ export const adminRoute = [
         url: "/login",
         component: <LoginPage></LoginPage>
     }
-
 ]

@@ -1,4 +1,4 @@
-import { Form, Input, Button, message } from 'antd';
+import { Form, Input, message } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { useDispatch } from 'react-redux';
 import { localUserServ } from '../../service/localService';
@@ -13,7 +13,6 @@ const LoginForm = () => {
         if (info != null) {
             return info
         }
-
         else {
             return { taiKhoan: "", matKhau: "" }
         }

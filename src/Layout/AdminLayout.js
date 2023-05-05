@@ -1,6 +1,8 @@
-import { FileOutlined, PieChartOutlined, UserOutlined, DesktopOutlined, TeamOutlined } from '@ant-design/icons';
-import { Breadcrumb, Layout, Menu, theme } from 'antd';
+import { PieChartOutlined, DesktopOutlined } from '@ant-design/icons';
+import { Layout, Menu, theme, Dropdown, Button } from 'antd';
 import { useState } from 'react';
+import { NavLink } from 'react-router-dom';
+import { localUserServ } from '../service/localService';
 const { Header, Content, Footer, Sider } = Layout;
 function getItem(label, key, icon, children) {
     return {
@@ -10,12 +12,25 @@ function getItem(label, key, icon, children) {
         label,
     };
 }
-const items = [
-    getItem('Người dùng', '1', <PieChartOutlined />),
+const menu = [
+    getItem(<NavLink to={'/admin-users'}>Người dùng</NavLink>, '1', <PieChartOutlined />),
     getItem('Khóa học', '2', <DesktopOutlined />),
 
 ];
+const items = [
+    {
+        key: "1",
+        label: 
+        <div
+        onClick={() => {
+            localUserServ.remove();
+            window.location.href = '/';
+        }}
+        >Đăng xuất</div>,
+    },
+  ];
 const AdminLayout = ({ Componet }) => {
+    const isInfoLogin = localUserServ.get();
     const [collapsed, setCollapsed] = useState(false);
     const {
         token: { colorBgContainer },
@@ -34,28 +49,40 @@ const AdminLayout = ({ Componet }) => {
                         background: 'rgba(255, 255, 255, 0.2)',
                     }}
                 />
-                <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} />
+                <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={menu} />
             </Sider>
             <Layout className="site-layout">
                 <Header
                     style={{
-                        padding: 0,
+                        padding: '0 16px',
                         background: colorBgContainer,
                     }}
-                />
+                >
+                    <div className='flex items-center justify-between h-full'>
+                        <div className='text-xl font-bold text-[#000000e0]'>Admin Vlearning</div>
+                        {isInfoLogin ? (
+                            <Dropdown
+                            menu={{
+                                items,
+                            }}
+                            placement="bottom"
+                            >
+                                <Button>Hello, {isInfoLogin.hoTen}</Button>
+                            </Dropdown> 
+                        ) : (
+                            <div>
+                                <NavLink to={'/login'}>
+                                    <Button>Đăng Nhập</Button>
+                                </NavLink>
+                            </div>
+                        )}
+                    </div>
+                </Header>
                 <Content
                     style={{
-                        margin: '0 16px',
+                        margin: '16px',
                     }}
                 >
-                    <Breadcrumb
-                        style={{
-                            margin: '16px 0',
-                        }}
-                    >
-                        <Breadcrumb.Item>User</Breadcrumb.Item>
-                        <Breadcrumb.Item>Bill</Breadcrumb.Item>
-                    </Breadcrumb>
                     <div
                         style={{
                             padding: 24,

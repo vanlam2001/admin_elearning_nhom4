@@ -24,7 +24,7 @@ export const headerColums = [
         dataIndex: "maLoaiNguoiDung",
         key: "maLoaiNguoiDung",
         render: (hv) => {
-            if (hv == "HV") {
+            if (hv === "HV") {
                 return <Tag className="font-medium" color="green">Học viên</Tag>
             }
 

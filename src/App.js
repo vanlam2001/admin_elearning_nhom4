@@ -11,8 +11,8 @@ function App() {
       <Spinner></Spinner>
       <BrowserRouter>
         <Routes>
-          {adminRoute.map(({ url, component }) => {
-            return <Route path={url} element={component}></Route>
+          {adminRoute.map(({ url, component }, index) => {
+            return <Route key={index} path={url} element={component}></Route>
           })}
         </Routes>
       </BrowserRouter>

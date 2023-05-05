@@ -15,13 +15,11 @@ export default function AdminUsersPage() {
         let handleDeleteUser = (taiKhoan) => {
             adminServ.deleteUser(taiKhoan)
                 .then((res) => {
-                    console.log(res)
                     message.success("xoá thành công");
                     fetchUserList();
                 })
                 .catch((err) => {
-                    console.log(err)
-                    message.error("Đã có lỗi xảy ra");
+                    message.error(err.response.data);
                 })
         }
 
@@ -29,12 +27,12 @@ export default function AdminUsersPage() {
             dispatch(setLoadingOn())
             adminServ
                 .getUserList()
-
                 .then((res) => {
                     dispatch(setLoadingOff());
-                    let userArr = res.data.map((user) => {
+                    let userArr = res.data.map((user, index) => {
                         return {
                             ...user,
+                            key: index,
                             action: (
                                 <Button onClick={() => {
                                     handleDeleteUser(user.taiKhoan);
@@ -47,9 +45,7 @@ export default function AdminUsersPage() {
                         }
                     })
                     setUserList(userArr);
-                    console.log(res)
                 })
-
                 .catch((err) => {
                     console.log(err);
                 })

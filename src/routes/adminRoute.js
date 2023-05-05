@@ -7,12 +7,10 @@ export const adminRoute = [
         url: "/admin-users",
         component: <AdminLayout Componet={AdminUsersPage}></AdminLayout>
     },
-
     {
         url: "/",
         component: <AdminLayout Componet={AdminUsersPage}></AdminLayout>
     },
-
     {
         url: "/login",
         component: <LoginPage></LoginPage>

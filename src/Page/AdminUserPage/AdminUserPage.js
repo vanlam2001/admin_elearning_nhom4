@@ -12,6 +12,18 @@ export default function AdminUsersPage() {
     const [userList, setUserList] = useState([]);
     let dispatch = useDispatch();
     useEffect(() => {
+        let editUser = () => {
+            adminServ.addUser()
+                .then((res) => {
+                    console.log(res)
+                    message.success("Sửa thành công")
+                })
+
+                .catch((err) => {
+                    console.log(err)
+                })
+        }
+
         let handleDeleteUser = (taiKhoan) => {
             adminServ.deleteUser(taiKhoan)
                 .then((res) => {
@@ -43,7 +55,8 @@ export default function AdminUsersPage() {
                                 >
                                     Xoá
                                 </Button>
-                            )
+                            ),
+
                         }
                     })
                     setUserList(userArr);

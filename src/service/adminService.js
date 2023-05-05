@@ -7,6 +7,13 @@ export const adminServ = {
 
     deleteUser: (taiKhoan) => {
         return https.delete(`/api/QuanLyNguoiDung/XoaNguoiDung?TaiKhoan=${taiKhoan}`)
+    },
+
+    updateUser: (data) => {
+        return https.post(`/api/QuanLyNguoiDung/CapNhatThongTinNguoiDung`, data)
     }
+
+
+
 }
 

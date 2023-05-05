@@ -11,15 +11,12 @@ export default function AdminUsersPage() {
     let dispatch = useDispatch();
     useEffect(() => {
         dispatch(setLoadingOn())
-        adminServ
-            .getUserList()
-
+        adminServ.getUserList()
             .then((res) => {
                 dispatch(setLoadingOff());
                 setUserList(res.data);
                 console.log(res)
             })
-
             .catch((err) => {
                 console.log(err);
             })

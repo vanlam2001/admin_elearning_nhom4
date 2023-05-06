@@ -18,7 +18,7 @@ export default function AdminCoursePage() {
     const dispatch = useDispatch();
     const [search, setSearch] = useSearchParams();
     const [isGroupCode, setIsGroupCode] = useState(() => {
-        if(paramsObj.isGroupCode) {
+        if (paramsObj.isGroupCode) {
             return paramsObj.isGroupCode;
         }
         else {
@@ -29,27 +29,27 @@ export default function AdminCoursePage() {
     const fetchListCourse = (isGroupCode) => {
         dispatch(setLoadingOn());
         courseService.getListCourse(isGroupCode)
-        .then((res) => {
-            dispatch(setLoadingOff())
-            setListCourse(res.data)
-        })
-        .catch((err) => {
-            dispatch(setLoadingOff())
-            console.log(err);
-        });
-    }
-    useEffect(() => {
-        if(paramsObj.search) {
-            dispatch(setLoadingOn());
-            courseService.getSearchCourse(paramsObj.search, isGroupCode)
             .then((res) => {
-                dispatch(setLoadingOff());
+                dispatch(setLoadingOff())
                 setListCourse(res.data)
             })
             .catch((err) => {
-                dispatch(setLoadingOff());
+                dispatch(setLoadingOff())
                 console.log(err);
             });
+    }
+    useEffect(() => {
+        if (paramsObj.search) {
+            dispatch(setLoadingOn());
+            courseService.getSearchCourse(paramsObj.search, isGroupCode)
+                .then((res) => {
+                    dispatch(setLoadingOff());
+                    setListCourse(res.data)
+                })
+                .catch((err) => {
+                    dispatch(setLoadingOff());
+                    console.log(err);
+                });
         }
         else {
             fetchListCourse(isGroupCode);
@@ -59,14 +59,14 @@ export default function AdminCoursePage() {
     // delete
     const handleDeleteCourse = (id) => {
         courseService.deleteCouser(id)
-        .then((res) => {
-            fetchListCourse(isGroupCode);
-            message.success('Xoá thành công!')
-        })
-        .catch((err) => {
-            console.log(err);
-            message.error(err.response.data)
-        });
+            .then((res) => {
+                fetchListCourse(isGroupCode);
+                message.success('Xoá thành công!')
+            })
+            .catch((err) => {
+                console.log(err);
+                message.error(err.response.data)
+            });
     }
     // change groupCode
     const handleChange = (value) => {
@@ -79,16 +79,16 @@ export default function AdminCoursePage() {
             search: value,
             isGroupCode: isGroupCode
         });
-        
-        if(value) {
+
+        if (value) {
             courseService.getSearchCourse(value, isGroupCode)
-            .then((res) => {
-                setListCourse(res.data)
-            })
-            .catch((err) => {
-                console.log(err);
-                setListCourse([])
-            });
+                .then((res) => {
+                    setListCourse(res.data)
+                })
+                .catch((err) => {
+                    console.log(err);
+                    setListCourse([])
+                });
         }
         else {
             fetchListCourse(isGroupCode);
@@ -103,68 +103,68 @@ export default function AdminCoursePage() {
             hinhAnh: item.hinhAnh,
             tenKhoaHoc: item.tenKhoaHoc,
             tenDanhMucKhoaHoc: item.danhMucKhoaHoc.tenDanhMucKhoaHoc,
-            moTa: item.moTa.substr(0,70) + '...',
+            moTa: item.moTa.substr(0, 70) + '...',
             ngayTao: item.ngayTao,
             luotXem: item.luotXem,
             action: (
                 <div className='flex justify-center'>
-                <NavLink to={`/admin-updatecourse/${item.maKhoaHoc}`}>
-                    <button className='p-2 text-base text-white bg-amber-400 mx-1 rounded'>
-                        <FaPencilAlt/>
-                    </button>
-                </NavLink>
-                <button onClick={() => {handleDeleteCourse(item.maKhoaHoc)}}  className='p-2 text-base text-white bg-red-500 mx-1 rounded'>
-                    <FaTrashAlt/>
+                    <NavLink to={`/admin-updatecourse/${item.maKhoaHoc}`}>
+                        <button className='p-2 text-base text-white bg-amber-400 mx-1 rounded'>
+                            <FaPencilAlt />
+                        </button>
+                    </NavLink>
+                    <button onClick={() => { handleDeleteCourse(item.maKhoaHoc) }} className='p-2 text-base text-white bg-red-500 mx-1 rounded'>
+                        <FaTrashAlt />
                     </button>
                 </div>
             ),
-        
+
         }
     })
 
-  return (
-    <div>
-        {localUserServ.get()?.maLoaiNguoiDung === 'GV' ? (
-            <div>
-            <NavLink to={'/admin-addcourse'}>
-                <Button type="primary" className='mb-3 bg-green-500'>Thêm khóa học</Button>
-            </NavLink>
+    return (
+        <div>
+            {localUserServ.get()?.maLoaiNguoiDung === 'GV' ? (
+                <div>
+                    <NavLink to={'/admin-addcourse'}>
+                        <Button type="primary" className='mb-3 bg-green-500'>Thêm khóa học</Button>
+                    </NavLink>
+                </div>
+            ) : <></>}
+
+            <div className='mb-3 flex items-center justify-between'>
+                <Select
+                    defaultValue={isGroupCode}
+                    style={{ width: 120 }}
+                    onChange={handleChange}
+                    options={[
+                        { value: 'GP01', label: 'GP01' },
+                        { value: 'GP02', label: 'GP02' },
+                        { value: 'GP03', label: 'GP03' },
+                        { value: 'GP04', label: 'GP04' },
+                        { value: 'GP05', label: 'GP05' },
+                        { value: 'GP06', label: 'GP06' },
+                        { value: 'GP07', label: 'GP07' },
+                        { value: 'GP08', label: 'GP08' },
+                        { value: 'GP09', label: 'GP09' },
+                        { value: 'GP10', label: 'GP10' },
+                        { value: 'GP11', label: 'GP11' },
+                        { value: 'GP12', label: 'GP12' },
+                        { value: 'GP13', label: 'GP13' },
+                        { value: 'GP14', label: 'GP14' },
+                        { value: 'GP15', label: 'GP15' },
+                    ]}
+                />
+                <Search
+                    placeholder="Nhập tên khoá học"
+                    onChange={onSearch}
+                    defaultValue={paramsObj?.search}
+                    style={{
+                        width: 250,
+                    }}
+                />
+            </div>
+            <Table dataSource={dataSource} columns={columns} />
         </div>
-        ) : <></>}
-        
-        <div className='mb-3 flex items-center justify-between'>
-            <Select
-                defaultValue={isGroupCode}
-                style={{ width: 120 }}
-                onChange={handleChange}
-                options={[
-                    { value: 'GP01', label: 'GP01' },
-                    { value: 'GP02', label: 'GP02' },
-                    { value: 'GP03', label: 'GP03' },
-                    { value: 'GP04', label: 'GP04' },
-                    { value: 'GP05', label: 'GP05' },
-                    { value: 'GP06', label: 'GP06' },
-                    { value: 'GP07', label: 'GP07' },
-                    { value: 'GP08', label: 'GP08' },
-                    { value: 'GP09', label: 'GP09' },
-                    { value: 'GP10', label: 'GP10' },
-                    { value: 'GP11', label: 'GP11' },
-                    { value: 'GP12', label: 'GP12' },
-                    { value: 'GP13', label: 'GP13' },
-                    { value: 'GP14', label: 'GP14' },
-                    { value: 'GP15', label: 'GP15' },
-                ]}
-            />
-            <Search
-            placeholder="Nhập tên khoá học"
-            onChange={onSearch}
-            defaultValue={paramsObj?.search}
-            style={{
-                width: 250,
-            }}
-            />
-        </div>
-        <Table dataSource={dataSource} columns={columns} />
-    </div>
-  )
+    )
 }

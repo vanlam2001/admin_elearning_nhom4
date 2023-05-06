@@ -15,13 +15,13 @@ export default function AdminKhoaHocPage() {
     const fetchCourseList = () => {
         dispatch(setLoadingOn())
         adminServ.getKhoaHocList()
-        .then((res) => {
-            dispatch(setLoadingOff());
-            dispatch(setListCourse(res.data))
-        })
-        .catch((err) => {
-            console.log(err)
-        })
+            .then((res) => {
+                dispatch(setLoadingOff());
+                dispatch(setListCourse(res.data))
+            })
+            .catch((err) => {
+                console.log(err)
+            })
     }
     useEffect(() => {
         fetchCourseList();
@@ -29,32 +29,32 @@ export default function AdminKhoaHocPage() {
     const handleDeleteCourse = (id) => {
         dispatch(setLoadingOn())
         adminServ.deleteCouser(id)
-        .then((res) => {
-            console.log(res);
-            fetchCourseList();
+            .then((res) => {
+                console.log(res);
+                fetchCourseList();
 
-        })
-        .catch((err) => {
-            console.log(err);
-        });
+            })
+            .catch((err) => {
+                console.log(err);
+            });
     }
 
     const data = khoaHocList?.map((item, index) => {
         return {
             key: index,
-            maKhoaHoc : item.maKhoaHoc,
+            maKhoaHoc: item.maKhoaHoc,
             hinhAnh: item.hinhAnh,
             tenKhoaHoc: item.tenKhoaHoc,
             tenDanhMucKhoaHoc: item.danhMucKhoaHoc.tenDanhMucKhoaHoc,
-            moTa: item.moTa.substr(0,70) + '...',
+            moTa: item.moTa.substr(0, 70) + '...',
             luotXem: item.luotXem,
             action: (
                 <div className='flex justify-center'>
                     <button className='p-2 text-base text-white bg-yellow-500 mx-1 rounded'>
-                        <FaPencilAlt/>
+                        <FaPencilAlt />
                     </button>
-                    <button onClick={() => {handleDeleteCourse(item.maKhoaHoc)}} className='p-2 text-base text-white bg-red-500 mx-1 rounded'>
-                        <FaTrashAlt/>
+                    <button onClick={() => { handleDeleteCourse(item.maKhoaHoc) }} className='p-2 text-base text-white bg-red-500 mx-1 rounded'>
+                        <FaTrashAlt />
                     </button>
                 </div>
             ),
@@ -63,7 +63,7 @@ export default function AdminKhoaHocPage() {
     })
     return (
         <div>
-            <BtnAddCourse/>
+            <BtnAddCourse />
             <Table columns={headerColums} dataSource={data}></Table>
         </div>
     )

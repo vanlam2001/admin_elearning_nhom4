@@ -14,7 +14,7 @@ function getItem(label, key, icon, children) {
 }
 const menu = [
     getItem(<NavLink to={'/admin-users'}>Người dùng</NavLink>, '1', <PieChartOutlined />),
-    getItem('Khóa học', '2', <DesktopOutlined />),
+    getItem(<NavLink to={'/admin-course'}>Khóa học</NavLink>, '2', <DesktopOutlined />),
 
 ];
 const items = [

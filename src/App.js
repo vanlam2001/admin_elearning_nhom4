@@ -2,7 +2,8 @@ import { adminRoute } from "./routes/adminRoute";
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import './App.css';
-import Spinner from "./toolkit/Spinner";
+import Spinner from "./Components/Spinner";
+
 
 function App() {
   return (

@@ -8,7 +8,7 @@ export const headerColums = [
     },
 
     {
-        title: "Tài người dùng",
+        title: "Tên người dùng",
         dataIndex: "hoTen",
         key: "hoTen",
     },
@@ -24,7 +24,7 @@ export const headerColums = [
         dataIndex: "maLoaiNguoiDung",
         key: "maLoaiNguoiDung",
         render: (hv) => {
-            if (hv == "HV") {
+            if (hv === "HV") {
                 return <Tag className="font-medium" color="green">Học viên</Tag>
             }
 
@@ -33,6 +33,12 @@ export const headerColums = [
             }
         }
     },
+
+    {
+        title: "Chức năng",
+        dataIndex: "action",
+        key: "action",
+    }
 
 
 

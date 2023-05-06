@@ -42,10 +42,41 @@ export default function UpdateCourse() {
         // eslint-disable-next-line
     }, [])
     
-    
+    const validateFile = (isFile) => {
+        const type = ['jpg', 'png', 'jpeg'];
+        const fileType = isFile.type.split("/")[1];
+        const fileSize = isFile.size;
+        if(type.includes(fileType)) {
+            if(fileSize < 1024*1024) {
+                return true;
+            }
+            else {
+                message.error('File không quá 1MB!')
+                return false;
+            }
+        }
+        else {
+            message.error('File phải là png, jpg, jpeg!')
+            return false;
+        }
+    }
 
     const onFinish = (values) => {
         let file = document.getElementById('upfile').files[0];
+        const data = {
+            maKhoaHoc: values.maKhoaHoc,
+            biDanh: values.biDanh,
+            tenKhoaHoc: values.tenKhoaHoc,
+            moTa: values.moTa,
+            luotXem: values.luotXem,
+            danhGia: values.danhGia,
+            hinhAnh: file.name,
+            maNhom: values.maNhom,
+            ngayTao: infoCourse.ngayTao,
+            maDanhMucKhoaHoc: values.maDanhMucKhoaHoc,
+            taiKhoanNguoiTao: infoCourse.nguoiTao.taiKhoan
+        }
+
         const upFile = () => {
             let frm = new FormData();
             frm.append('file',file)
@@ -60,29 +91,19 @@ export default function UpdateCourse() {
                 console.log(err);
             });
         }
-        const data = {
-            maKhoaHoc: values.maKhoaHoc,
-            biDanh: values.biDanh,
-            tenKhoaHoc: values.tenKhoaHoc,
-            moTa: values.moTa,
-            luotXem: values.luotXem,
-            danhGia: values.danhGia,
-            hinhAnh: file.name,
-            maNhom: values.maNhom,
-            ngayTao: infoCourse.ngayTao,
-            maDanhMucKhoaHoc: values.maDanhMucKhoaHoc,
-            taiKhoanNguoiTao: infoCourse.nguoiTao.taiKhoan
+
+        if(validateFile(file)) {
+            courseService.putUpdateCourse(data)
+            .then((res) => {
+                console.log(res);
+                message.success('Cập nhật khoá học thành công!');
+                upFile();
+            })
+            .catch((err) => {
+                message.error(err.response.data);
+                console.log(err);
+            });
         }
-        courseService.putUpdateCourse(data)
-        .then((res) => {
-            console.log(res);
-            message.success('Cập nhật khoá học thành công!');
-            upFile();
-        })
-        .catch((err) => {
-            message.error(err.response.data);
-            console.log(err);
-        });
         
     };
     const onFinishFailed = (errorInfo) => {

@@ -19,22 +19,27 @@ export default function AddCourse() {
         });
     }, [])
 
+    const validateFile = (isFile) => {
+        const type = ['jpg', 'png', 'jpeg'];
+        const fileType = isFile.type.split("/")[1];
+        const fileSize = isFile.size;
+        if(type.includes(fileType)) {
+            if(fileSize < 1024*1024) {
+                return true;
+            }
+            else {
+                message.error('File không quá 1MB!')
+                return false;
+            }
+        }
+        else {
+            message.error('File phải là png, jpg, jpeg!')
+            return false;
+        }
+    }
+
     const onFinish = (values) => {
         let file = document.getElementById('upfile').files[0];
-        const upFile = () => {
-            let frm = new FormData();
-            frm.append('file',file)
-            frm.append('tenKhoaHoc',values.tenKhoaHoc)
-            courseService.postAddImageCourse(frm)
-            .then((res) => {
-                message.success(res.data)
-                navigate('/admin-course');
-            })
-            .catch((err) => {
-                message.error(err.response.data)
-                console.log(err);
-            });
-        }
         let toDay = new Date();
         let day = toDay.getDate() + '/' + (toDay.getMonth()+1) + '/' + toDay.getFullYear();
         const data = {
@@ -50,14 +55,32 @@ export default function AddCourse() {
             maDanhMucKhoaHoc:values.maDanhMucKhoaHoc,
             taiKhoanNguoiTao: localUserServ.get().taiKhoan
         }
-        courseService.postAddCourse(data)
-        .then((res) => {
-            message.success('Thêm khoá học thành công!')
-            upFile();
-        })
-        .catch((err) => {
-            message.error(err.response.data)
-        });
+
+        const upFile = () => {
+            let frm = new FormData();
+            frm.append('file',file)
+            frm.append('tenKhoaHoc',values.tenKhoaHoc)
+            courseService.postAddImageCourse(frm)
+            .then((res) => {
+                message.success(res.data)
+                navigate('/admin-course');
+            })
+            .catch((err) => {
+                message.error(err.response.data)
+                console.log(err);
+            });
+        }
+
+        if(validateFile(file)) {
+            courseService.postAddCourse(data)
+            .then((res) => {
+                message.success('Thêm khoá học thành công!')
+                upFile();
+            })
+            .catch((err) => {
+                message.error(err.response.data)
+            });
+        }
 
     };
     const onFinishFailed = (errorInfo) => {

@@ -12,7 +12,6 @@ import { localUserServ } from '../../service/localService';
 const { Search } = Input;
 
 export default function AdminCoursePage() {
-    console.log("🚀 ~ file: AdminCoursePage.js:8 ~ columns:", columns)
     const stringQuery = window.location.search.substring(1)
     let paramsObj = qs.parse(stringQuery)
 

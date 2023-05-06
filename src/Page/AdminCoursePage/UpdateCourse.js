@@ -84,7 +84,6 @@ export default function UpdateCourse() {
             courseService.postAddImageCourse(frm)
             .then((res) => {
                 message.success(res.data)
-                navigate('/admin-course');
             })
             .catch((err) => {
                 message.error(err.response.data)
@@ -98,6 +97,7 @@ export default function UpdateCourse() {
                 console.log(res);
                 message.success('Cập nhật khoá học thành công!');
                 upFile();
+                navigate('/admin-course');
             })
             .catch((err) => {
                 message.error(err.response.data);

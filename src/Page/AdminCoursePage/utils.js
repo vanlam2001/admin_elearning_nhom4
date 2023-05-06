@@ -1,3 +1,4 @@
+import { localUserServ } from "../../service/localService";
 
 
 export const columns = [
@@ -51,5 +52,8 @@ export const columns = [
         dataIndex: "action",
         key: "action",
         width: "10%",
+        hidden: localUserServ.get()?.maLoaiNguoiDung === 'GV' ? false : true,
     },
-];
+].filter((item) => {
+    return !item.hidden
+});

@@ -8,9 +8,11 @@ import { columns } from './utils';
 import qs from 'qs';
 import { useDispatch } from 'react-redux';
 import { setLoadingOff, setLoadingOn } from '../../toolkit/spinnerSlice';
+import { localUserServ } from '../../service/localService';
 const { Search } = Input;
 
 export default function AdminCoursePage() {
+    console.log("🚀 ~ file: AdminCoursePage.js:8 ~ columns:", columns)
     const stringQuery = window.location.search.substring(1)
     let paramsObj = qs.parse(stringQuery)
 
@@ -123,11 +125,14 @@ export default function AdminCoursePage() {
 
   return (
     <div>
-        <div>
+        {localUserServ.get()?.maLoaiNguoiDung === 'GV' ? (
+            <div>
             <NavLink to={'/admin-addcourse'}>
                 <Button type="primary" className='mb-3 bg-green-500'>Thêm khóa học</Button>
             </NavLink>
         </div>
+        ) : <></>}
+        
         <div className='mb-3 flex items-center justify-between'>
             <Select
                 defaultValue={isGroupCode}

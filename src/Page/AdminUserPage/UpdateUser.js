@@ -1,7 +1,34 @@
 import { Button, Form, Input, Select, InputNumber } from 'antd';
-import React from 'react'
+import React, { useState } from 'react'
+import { useNavigate, useParams } from 'react-router';
+import { adminServ } from '../../service/adminService';
 const { Option } = Select;
 export default function UpdateUser() {
+    const navigate = useNavigate();
+    const params = useParams();
+    const [form] = Form.useForm();
+    const [infoUser, setInfoUser] = useState({});
+    const [userMenu, setUserMenu] = useState([]);
+    const setInititalValue = () => {
+        adminServ.getUserList()
+
+            .then((res) => {
+                const course = res.data
+                setInfoUser(course)
+                form.setFieldsValue({
+                    taiKhoan: course.taiKhoan,
+                    matKhau: course.matKhau,
+                    hoTen: course.hoTen,
+                    soDt: course.soDt,
+                    maLoaiNguoiDung: course.maLoaiNguoiDung,
+                    maNhom: course.maNhom,
+                    email: course.email,
+                })
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }
     return (
         <div className='h-full flex flex-col items-center'>
             <h1 className="text-xl text-amber-400 font-bold leading-tight tracking-tight md:text-2xl">

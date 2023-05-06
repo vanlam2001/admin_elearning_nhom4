@@ -27,7 +27,6 @@ export const headerColums = [
     },
 
 
-
     {
         title: "Loại người dùng",
         dataIndex: "maLoaiNguoiDung",

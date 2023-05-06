@@ -1,19 +1,15 @@
 import { https } from "./config"
 
 export const adminServ = {
-    getUserList: () => {
-        return https.get(`/api/QuanLyNguoiDung/LayDanhSachNguoiDung?MaNhom=GP01`)
+    getUserList: (id) => {
+        return https.get(`/api/QuanLyNguoiDung/LayDanhSachNguoiDung?MaNhom=${id}`)
     },
     deleteUser: (taiKhoan) => {
         return https.delete(`/api/QuanLyNguoiDung/XoaNguoiDung?TaiKhoan=${taiKhoan}`)
     },
 
-    getSearchUser: (keyword) => {
-        return https.get(`/api/QuanLyNguoiDung/TimKiemNguoiDung?MaNhom=GP01&tuKhoa=${keyword}`)
+    getSearchUser: (keywords) => {
+        return https.get(`/api/QuanLyNguoiDung/TimKiemNguoiDung?tuKhoa=${keywords}`)
     },
-
-    putUpdateUsers: (data) => {
-        return https.put(`/api/QuanLyNguoiDung/CapNhatThongTinNguoiDung`, data)
-    }
 }
 

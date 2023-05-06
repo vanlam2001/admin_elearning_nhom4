@@ -12,6 +12,18 @@ export default function AdminUsersPage() {
     const [userList, setUserList] = useState([]);
     let dispatch = useDispatch();
     useEffect(() => {
+
+        dispatch(setLoadingOn())
+        adminServ.getUserList()
+            .then((res) => {
+                dispatch(setLoadingOff());
+                setUserList(res.data);
+                console.log(res)
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+
         let handleDeleteUser = (taiKhoan) => {
             adminServ.deleteUser(taiKhoan)
                 .then((res) => {
@@ -51,6 +63,7 @@ export default function AdminUsersPage() {
                 })
         }
         fetchUserList();
+
     }, []);
 
     return (

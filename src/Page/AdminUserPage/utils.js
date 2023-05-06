@@ -7,6 +7,7 @@ export const headerColums = [
         key: "taiKhoan",
     },
 
+
     {
         title: "Tên người dùng",
         dataIndex: "hoTen",
@@ -18,6 +19,14 @@ export const headerColums = [
         dataIndex: "email",
         key: "email",
     },
+
+    {
+        title: "Số điện thoại",
+        dataIndex: "soDt",
+        key: "soDt",
+    },
+
+
 
     {
         title: "Loại người dùng",

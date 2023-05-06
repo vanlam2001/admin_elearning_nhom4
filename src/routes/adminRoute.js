@@ -3,6 +3,7 @@ import AddCourse from "../Page/AdminCoursePage/AddCourse";
 import AdminCoursePage from "../Page/AdminCoursePage/AdminCoursePage";
 import UpdateCourse from "../Page/AdminCoursePage/UpdateCourse";
 import AdminUsersPage from "../Page/AdminUserPage/AdminUserPage";
+import UpdateUser from "../Page/AdminUserPage/UpdateUser";
 import LoginPage from "../Page/LoginPage/LoginPage";
 
 export const adminRoute = [
@@ -29,5 +30,10 @@ export const adminRoute = [
     {
         url: "/login",
         component: <LoginPage></LoginPage>
+    },
+
+    {
+        url: "/admin-updateuser/:id",
+        component: <AdminLayout Componet={UpdateUser}></AdminLayout>
     }
 ]

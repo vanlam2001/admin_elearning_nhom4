@@ -5,16 +5,18 @@ import { headerColums } from './utils';
 import { useDispatch } from 'react-redux';
 import { setLoadingOff, setLoadingOn } from '../../toolkit/spinnerSlice';
 import Spinner from '../../Components/Spinner';
-import { useSearchParams } from 'react-router-dom';
+import { NavLink, useSearchParams } from 'react-router-dom';
 import { FaPencilAlt, FaTrashAlt } from 'react-icons/fa';
 import qs from "qs";
 
+const { Search } = Input;
 
 
 export default function AdminUsersPage() {
     const [userList, setUserList] = useState([]);
     const [searchValue, setSearchValue] = useSearchParams();
     let dispatch = useDispatch();
+
 
     useEffect(() => {
         dispatch(setLoadingOn())
@@ -47,9 +49,12 @@ export default function AdminUsersPage() {
                         ...user,
                         action: (
                             <div>
-                                <button className='p-2 text-base text-white bg-yellow-500 mx-1 rounded'>
-                                    <FaPencilAlt />
-                                </button>
+                                <NavLink to={`/admin-updateuser/${user.taiKhoan}`}>
+                                    <button className='p-2 text-base text-white bg-yellow-500 mx-1 rounded'>
+                                        <FaPencilAlt />
+                                    </button>
+                                </NavLink>
+
 
                                 <button onClick={() => {
                                     handleDeleteUser(user.taiKhoan);
@@ -122,7 +127,14 @@ export default function AdminUsersPage() {
 
     return (
         <div>
-            <Input onChange={handleSearchOnchange} placeholder='Tìm kiếm người dùng' className='my-5 border-black placeholder:text-black placeholder:font-medium focus:border-black focus:border-2'></Input>
+            <div className='mb-3 flex items-center justify-between'>
+                <Search onChange={handleSearchOnchange} placeholder='Tìm tài khoản'
+                    style={{
+                        width: 250,
+                    }}></Search>
+            </div>
+
+
             <Spinner></Spinner>
             <Table columns={headerColums} dataSource={userList}></Table>
         </div>

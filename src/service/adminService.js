@@ -10,6 +10,10 @@ export const adminServ = {
 
     getSearchUser: (keyword) => {
         return https.get(`/api/QuanLyNguoiDung/TimKiemNguoiDung?MaNhom=GP01&tuKhoa=${keyword}`)
+    },
+
+    putUpdateUsers: (data) => {
+        return https.put(`/api/QuanLyNguoiDung/CapNhatThongTinNguoiDung`, data)
     }
 }
 

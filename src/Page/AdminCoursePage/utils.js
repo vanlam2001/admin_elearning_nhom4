@@ -3,10 +3,10 @@ import { localUserServ } from "../../service/localService";
 
 export const columns = [
     {
-    title: "Mã khóa học",
-    dataIndex: "maKhoaHoc",
-    key: "maKhoaHoc",
-    width: "8%",
+        title: "Mã khóa học",
+        dataIndex: "maKhoaHoc",
+        key: "maKhoaHoc",
+        width: "8%",
     },
     {
         title: "Hình ảnh",

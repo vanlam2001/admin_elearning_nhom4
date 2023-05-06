@@ -1,14 +1,10 @@
 import AdminLayout from "../Layout/AdminLayout";
 
-import AddCourse from "../Page/AdminKhoaHocPage/AddCourse";
-import AdminKhoaHocPage from "../Page/AdminKhoaHocPage/AdminKhoaHocPage";
-import AdminUserPage from "../Page/AdminUserPage/AdminUserPage";
-
-
 import AdminCoursePage from "../Page/AdminCoursePage/AdminCoursePage";
 import UpdateCourse from "../Page/AdminCoursePage/UpdateCourse";
 import AdminUsersPage from "../Page/AdminUserPage/AdminUserPage";
 import LoginPage from "../Page/LoginPage/LoginPage";
+import AddCourse from "../Page/AdminCoursePage/AddCourse";
 
 
 export const adminRoute = [
@@ -39,7 +35,7 @@ export const adminRoute = [
 
     {
         url: "/admin-khoahoc",
-        component: <AdminLayout Componet={AdminKhoaHocPage}></AdminLayout>
+        component: <AdminLayout Componet={AdminCoursePage}></AdminLayout>
     },
 
     {

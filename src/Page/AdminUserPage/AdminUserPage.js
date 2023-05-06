@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import { setLoadingOff, setLoadingOn } from '../../toolkit/spinnerSlice';
 import Spinner from '../../Components/Spinner';
 import { useSearchParams } from 'react-router-dom';
+import { FaPencilAlt, FaTrashAlt } from 'react-icons/fa';
 import qs from "qs";
 
 
@@ -45,13 +46,22 @@ export default function AdminUsersPage() {
                     return {
                         ...user,
                         action: (
-                            <Button onClick={() => {
-                                handleDeleteUser(user.taiKhoan);
-                            }} type="primary "
-                                danger
-                            >
-                                Xoá
-                            </Button>
+                            <div>
+                                <button className='p-2 text-base text-white bg-yellow-500 mx-1 rounded'>
+                                    <FaPencilAlt />
+                                </button>
+
+                                <button onClick={() => {
+                                    handleDeleteUser(user.taiKhoan);
+                                }} className='p-2 text-base text-white bg-red-500 mx-1 rounded'
+                                >
+                                    <FaTrashAlt />
+                                </button>
+
+
+
+                            </div>
+
                         ),
 
                     }
@@ -85,10 +95,19 @@ export default function AdminUsersPage() {
                         return {
                             ...item,
                             action: (
-                                <Button onClick={() => {
-                                    handleDeleteUser(item.taiKhoan)
-                                }} type="primary"
-                                    danger>Xóa</Button>
+                                <div>
+                                    <button className='p-2 text-base text-white bg-yellow-500 mx-1 rounded'>
+                                        <FaPencilAlt />
+                                    </button>
+
+                                    <button onClick={() => {
+                                        handleDeleteUser(item.taiKhoan);
+                                    }} className='p-2 text-base text-white bg-red-500 mx-1 rounded'
+                                    >
+                                        <FaTrashAlt />
+                                    </button>
+                                </div>
+
                             )
                         }
                     })

@@ -10,5 +10,15 @@ export const adminServ = {
     getSearchUser: (keywords, isGroupCode) => {
         return https.get(`/api/QuanLyNguoiDung/TimKiemNguoiDung?MaNhom=${isGroupCode}&tuKhoa=${keywords}`)
     },
+
+    putUpdateUser: (data) => {
+        return https.put(`/api/QuanLyNguoiDung/CapNhatThongTinNguoiDung`, data)
+    },
+
+    getInfoUser: () => {
+        return https.get('/api/QuanLyKhoaHoc/LayThongTinHocVienKhoaHoc')
+    }
+
+
 }
 

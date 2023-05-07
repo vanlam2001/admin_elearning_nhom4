@@ -121,9 +121,12 @@ export default function AdminUsersPage() {
             maLoaiNguoiDung: item.maLoaiNguoiDung,
             action: (
                 <div className='flex justify-center'>
-                    <button className='p-2 text-base text-white bg-amber-400 mx-1 rounded'>
-                        <FaPencilAlt />
-                    </button>
+                    <NavLink to={`/admin-updateuser/${item.taiKhoan}`}>
+                        <button className='p-2 text-base text-white bg-amber-400 mx-1 rounded'>
+                            <FaPencilAlt />
+                        </button>
+
+                    </NavLink>
 
                     <button onClick={() => { handleDeleteUser(item.taiKhoan) }} className='p-2 text-base text-white bg-red-500 mx-1 rounded'>
                         <FaTrashAlt />

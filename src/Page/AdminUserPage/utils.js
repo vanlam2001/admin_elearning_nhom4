@@ -7,7 +7,6 @@ export const headerColums = [
         key: "taiKhoan",
     },
 
-
     {
         title: "Tên người dùng",
         dataIndex: "hoTen",

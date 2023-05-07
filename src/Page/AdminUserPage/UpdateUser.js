@@ -3,13 +3,15 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { adminServ } from '../../service/adminService';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { checkEmail, checkFullName, checkPassword, checkPhoneVietNam, checkUserName } from './ValidationForm';
 const { Option } = Select;
 export default function UpdateUser() {
     const navigate = useNavigate()
     const [form] = Form.useForm();
 
-
     const onFinish = (values) => {
+        let info = { ...values, maNhom: 'GP01' };
+        let { matKhau, hoTen, soDT, email } = info
         const data = {
             taiKhoan: values.taiKhoan,
             matKhau: values.matKhau,
@@ -19,18 +21,21 @@ export default function UpdateUser() {
             maNhom: values.maNhom,
             email: values.email
         }
+        let isValidation = checkPassword(matKhau) && checkFullName(hoTen) && checkEmail(email) && checkPhoneVietNam(soDT)
+        if (isValidation) {
+            adminServ.putUpdateUser(data)
+                .then((res) => {
+                    console.log(res)
+                    message.success('Cập nhật thành công!');
+                    navigate('/admin-users')
+                })
 
-        adminServ.putUpdateUser(data)
-            .then((res) => {
-                console.log(res)
-                message.success('Cập nhật thành công!');
-                navigate('/admin-users')
-            })
+                .catch((err) => {
+                    message.error(err.response.data);
+                    console.log(err)
+                })
+        }
 
-            .catch((err) => {
-                message.error(err.response.data);
-                console.log(err)
-            })
     }
 
     const onFinishFailed = (errInfo) => {

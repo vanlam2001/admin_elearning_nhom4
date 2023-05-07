@@ -7,9 +7,8 @@ export const adminServ = {
     deleteUser: (taiKhoan) => {
         return https.delete(`/api/QuanLyNguoiDung/XoaNguoiDung?TaiKhoan=${taiKhoan}`)
     },
-
-    getSearchUser: (keywords) => {
-        return https.get(`/api/QuanLyNguoiDung/TimKiemNguoiDung?tuKhoa=${keywords}`)
+    getSearchUser: (keywords, isGroupCode) => {
+        return https.get(`/api/QuanLyNguoiDung/TimKiemNguoiDung?MaNhom=${isGroupCode}&tuKhoa=${keywords}`)
     },
 }
 

@@ -11,20 +11,20 @@ export default function AddCourse() {
     const [courseMenu, setCourseMenu] = useState([]);
     useEffect(() => {
         courseService.getCourseMenu()
-        .then((res) => {
-            setCourseMenu(res.data)
-        })
-        .catch((err) => {
-            console.log(err);
-        });
+            .then((res) => {
+                setCourseMenu(res.data)
+            })
+            .catch((err) => {
+                console.log(err);
+            });
     }, [])
 
     const validateFile = (isFile) => {
         const type = ['jpg', 'png', 'jpeg'];
         const fileType = isFile.type.split("/")[1];
         const fileSize = isFile.size;
-        if(type.includes(fileType)) {
-            if(fileSize < 1024*1024) {
+        if (type.includes(fileType)) {
+            if (fileSize < 1024 * 1024) {
                 return true;
             }
             else {
@@ -41,7 +41,7 @@ export default function AddCourse() {
     const onFinish = (values) => {
         let file = document.getElementById('upfile').files[0];
         let toDay = new Date();
-        let day = toDay.getDate() + '/' + (toDay.getMonth()+1) + '/' + toDay.getFullYear();
+        let day = toDay.getDate() + '/' + (toDay.getMonth() + 1) + '/' + toDay.getFullYear();
         const data = {
             maKhoaHoc: values.maKhoaHoc,
             biDanh: values.biDanh,
@@ -52,34 +52,34 @@ export default function AddCourse() {
             hinhAnh: file.name,
             maNhom: values.maNhom,
             ngayTao: day,
-            maDanhMucKhoaHoc:values.maDanhMucKhoaHoc,
+            maDanhMucKhoaHoc: values.maDanhMucKhoaHoc,
             taiKhoanNguoiTao: localUserServ.get().taiKhoan
         }
 
         const upFile = () => {
             let frm = new FormData();
-            frm.append('file',file)
-            frm.append('tenKhoaHoc',values.tenKhoaHoc)
+            frm.append('file', file)
+            frm.append('tenKhoaHoc', values.tenKhoaHoc)
             courseService.postAddImageCourse(frm)
-            .then((res) => {
-                message.success(res.data)
-                navigate('/admin-course');
-            })
-            .catch((err) => {
-                message.error(err.response.data)
-                console.log(err);
-            });
+                .then((res) => {
+                    message.success(res.data)
+                    navigate('/admin-course');
+                })
+                .catch((err) => {
+                    message.error(err.response.data)
+                    console.log(err);
+                });
         }
 
-        if(validateFile(file)) {
+        if (validateFile(file)) {
             courseService.postAddCourse(data)
-            .then((res) => {
-                message.success('Thêm khoá học thành công!')
-                upFile();
-            })
-            .catch((err) => {
-                message.error(err.response.data)
-            });
+                .then((res) => {
+                    message.success('Thêm khoá học thành công!')
+                    upFile();
+                })
+                .catch((err) => {
+                    message.error(err.response.data)
+                });
         }
 
     };
@@ -88,208 +88,208 @@ export default function AddCourse() {
     };
 
 
-  return (
-    <div className='h-full flex flex-col items-center '>
-        <h1 className="text-xl text-green-500 font-bold leading-tight tracking-tight md:text-2xl">
-        Thêm khoá học
-        </h1>
-        <Form
-        className='!mt-4'
-        method="post" encType="multipart/form-data"
-            name="basic"
-            labelCol={{
-            span: 6,
-            }}
-            wrapperCol={{
-            span: 24,
-            }}
-            style={{
-            maxWidth: 600,
-            minWidth: 400,
-            }}
-            initialValues={{
-            remember: true,
-            }}
-            onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
-            autoComplete="off"
-            requiredMark={false}
-
-        >
-            <Form.Item
-            label='Mã khoá học'
-            name="maKhoaHoc"
-            rules={[
-                {
-                required: true,
-                message: 'Vui lòng nhập mã khoá học!',
-                },
-            ]}
-            >
-            <Input />
-            </Form.Item>
-
-            <Form.Item
-            label='Bí danh'
-            name="biDanh"
-            rules={[
-                {
-                required: true,
-                message: 'Vui lòng nhập bí danh!',
-                },
-            ]}
-            >
-            <Input />
-            </Form.Item>
-
-            <Form.Item
-            label='Tên khoá học'
-            name="tenKhoaHoc"
-            rules={[
-                {
-                required: true,
-                message: 'Vui lòng nhập tên khoá học!',
-                },
-            ]}
-            >
-            <Input />
-            </Form.Item>
-
-            <Form.Item
-            label='Mô tả'
-            name="moTa"
-            rules={[
-                {
-                required: true,
-                message: 'Vui lòng nhập mô tả!',
-                },
-            ]}
-            >
-            <Input />
-            </Form.Item>
-
-            <Form.Item
-            label='Lượt xem'
-            name="luotXem"
-            initialValue={0}
-            rules={[
-                {
-                required: true,
-                message: 'Vui lòng nhập lượt xem!',
-                },
-                {
-                    pattern: /^[0-9]*$/,
-                    message: "Lượt xem phải là số >= 0!",
-                },
-            ]}
-            >
-            <InputNumber />
-            </Form.Item>
-
-            <Form.Item
-            label='Đánh giá'
-            name="danhGia"
-            initialValue={0}
-            rules={[
-                {
-                required: true,
-                message: 'Vui lòng nhập đánh giá!',
-                },
-                {
-                    pattern: /^[0-9]*$/,
-                    message: "Đánh giá phải là số >= 0!",
-                },
-            ]}
-            >
-            <InputNumber />
-            </Form.Item>
-
-            <Form.Item
-            label='Hình ảnh'
-            name="file"
-            rules={[
-                {
-                required: true,
-                message: 'Vui lòng chọn file!',
-                },
-            ]}
-            >
-            <input type="file" name="file" id="upfile"/>
-            </Form.Item>
-
-            {/* group code */}
-            <Form.Item
-            label='Danh mục'
-            name="maDanhMucKhoaHoc"
-            initialValue="BackEnd"
-            rules={[
-                {
-                required: true,
-                message: 'Không được để trống!',
-                },
-                
-            ]}
-            >
-                <Select
-                    allowClear
-                >
-                    {courseMenu?.map((item, index) => {
-                        return <Option key={index} value={item.maDanhMuc}>{item.tenDanhMuc}</Option>
-                    })}
-                </Select>
-            </Form.Item>
-            <Form.Item
-            label='Mã nhóm'
-            name="maNhom"
-            initialValue="GP01"
-            rules={[
-                {
-                required: true,
-                message: 'Không được để trống!',
-                },
-                
-            ]}
-            >
-                <Select
-                    allowClear
-                >
-                    <Option value="GP01">GP01</Option>
-                    <Option value="GP02">GP02</Option>
-                    <Option value="GP03">GP03</Option>
-                    <Option value="GP04">GP04</Option>
-                    <Option value="GP05">GP05</Option>
-                    <Option value="GP06">GP06</Option>
-                    <Option value="GP07">GP07</Option>
-                    <Option value="GP08">GP08</Option>
-                    <Option value="GP09">GP09</Option>
-                    <Option value="GP10">GP10</Option>
-                    <Option value="GP11">GP11</Option>
-                    <Option value="GP12">GP12</Option>
-                    <Option value="GP13">GP13</Option>
-                    <Option value="GP14">GP14</Option>
-                    <Option value="GP15">GP15</Option>
-                </Select>
-            </Form.Item>
-
-
-
-            {/* btn */}
-            <Form.Item
-            className='text-center'
-            wrapperCol={{
-                offset: 0,
-                span: 24,
-            }}
-            >
-            <Button 
-            type="primary" 
-            htmlType="submit"
-            className='text-white bg-green-500'
-            >
+    return (
+        <div className='h-full flex flex-col items-center '>
+            <h1 className="text-xl text-green-500 font-bold leading-tight tracking-tight md:text-2xl">
                 Thêm khoá học
-            </Button>
-            </Form.Item>
-        </Form>
-    </div>
-  )
+            </h1>
+            <Form
+                className='!mt-4'
+                method="post" encType="multipart/form-data"
+                name="basic"
+                labelCol={{
+                    span: 6,
+                }}
+                wrapperCol={{
+                    span: 24,
+                }}
+                style={{
+                    maxWidth: 600,
+                    minWidth: 400,
+                }}
+                initialValues={{
+                    remember: true,
+                }}
+                onFinish={onFinish}
+                onFinishFailed={onFinishFailed}
+                autoComplete="off"
+                requiredMark={false}
+
+            >
+                <Form.Item
+                    label='Mã khoá học'
+                    name="maKhoaHoc"
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Vui lòng nhập mã khoá học!',
+                        },
+                    ]}
+                >
+                    <Input />
+                </Form.Item>
+
+                <Form.Item
+                    label='Bí danh'
+                    name="biDanh"
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Vui lòng nhập bí danh!',
+                        },
+                    ]}
+                >
+                    <Input />
+                </Form.Item>
+
+                <Form.Item
+                    label='Tên khoá học'
+                    name="tenKhoaHoc"
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Vui lòng nhập tên khoá học!',
+                        },
+                    ]}
+                >
+                    <Input />
+                </Form.Item>
+
+                <Form.Item
+                    label='Mô tả'
+                    name="moTa"
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Vui lòng nhập mô tả!',
+                        },
+                    ]}
+                >
+                    <Input />
+                </Form.Item>
+
+                <Form.Item
+                    label='Lượt xem'
+                    name="luotXem"
+                    initialValue={0}
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Vui lòng nhập lượt xem!',
+                        },
+                        {
+                            pattern: /^[0-9]*$/,
+                            message: "Lượt xem phải là số >= 0!",
+                        },
+                    ]}
+                >
+                    <InputNumber />
+                </Form.Item>
+
+                <Form.Item
+                    label='Đánh giá'
+                    name="danhGia"
+                    initialValue={0}
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Vui lòng nhập đánh giá!',
+                        },
+                        {
+                            pattern: /^[0-9]*$/,
+                            message: "Đánh giá phải là số >= 0!",
+                        },
+                    ]}
+                >
+                    <InputNumber />
+                </Form.Item>
+
+                <Form.Item
+                    label='Hình ảnh'
+                    name="file"
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Vui lòng chọn file!',
+                        },
+                    ]}
+                >
+                    <input type="file" name="file" id="upfile" />
+                </Form.Item>
+
+                {/* group code */}
+                <Form.Item
+                    label='Danh mục'
+                    name="maDanhMucKhoaHoc"
+                    initialValue="BackEnd"
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Không được để trống!',
+                        },
+
+                    ]}
+                >
+                    <Select
+                        allowClear
+                    >
+                        {courseMenu?.map((item, index) => {
+                            return <Option key={index} value={item.maDanhMuc}>{item.tenDanhMuc}</Option>
+                        })}
+                    </Select>
+                </Form.Item>
+                <Form.Item
+                    label='Mã nhóm'
+                    name="maNhom"
+                    initialValue="GP01"
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Không được để trống!',
+                        },
+
+                    ]}
+                >
+                    <Select
+                        allowClear
+                    >
+                        <Option value="GP01">GP01</Option>
+                        <Option value="GP02">GP02</Option>
+                        <Option value="GP03">GP03</Option>
+                        <Option value="GP04">GP04</Option>
+                        <Option value="GP05">GP05</Option>
+                        <Option value="GP06">GP06</Option>
+                        <Option value="GP07">GP07</Option>
+                        <Option value="GP08">GP08</Option>
+                        <Option value="GP09">GP09</Option>
+                        <Option value="GP10">GP10</Option>
+                        <Option value="GP11">GP11</Option>
+                        <Option value="GP12">GP12</Option>
+                        <Option value="GP13">GP13</Option>
+                        <Option value="GP14">GP14</Option>
+                        <Option value="GP15">GP15</Option>
+                    </Select>
+                </Form.Item>
+
+
+
+                {/* btn */}
+                <Form.Item
+                    className='text-center'
+                    wrapperCol={{
+                        offset: 0,
+                        span: 24,
+                    }}
+                >
+                    <Button
+                        type="primary"
+                        htmlType="submit"
+                        className='text-white bg-green-500'
+                    >
+                        Thêm khoá học
+                    </Button>
+                </Form.Item>
+            </Form>
+        </div>
+    )
 }

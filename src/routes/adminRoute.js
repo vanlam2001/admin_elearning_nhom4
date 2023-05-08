@@ -2,6 +2,7 @@ import AdminLayout from "../Layout/AdminLayout";
 import AddCourse from "../Page/AdminCoursePage/AddCourse";
 import AdminCoursePage from "../Page/AdminCoursePage/AdminCoursePage";
 import UpdateCourse from "../Page/AdminCoursePage/UpdateCourse";
+import AddUser from "../Page/AdminUserPage/AddUser";
 import AdminUsersPage from "../Page/AdminUserPage/AdminUserPage";
 import UpdateUser from "../Page/AdminUserPage/UpdateUser";
 import LoginPage from "../Page/LoginPage/LoginPage";
@@ -35,5 +36,10 @@ export const adminRoute = [
     {
         url: "/admin-updateuser/:id",
         component: <AdminLayout Componet={UpdateUser}></AdminLayout>
+    },
+
+    {
+        url: "/admin-adduser",
+        component: <AdminLayout Componet={AddUser}></AdminLayout>
     }
 ]

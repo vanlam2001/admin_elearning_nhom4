@@ -20,6 +20,13 @@ export const headerColums = [
     },
 
     {
+        title: "Số điện thoại",
+        dataIndex: "soDt",
+        key: "soDt",
+    },
+
+
+    {
         title: "Loại người dùng",
         dataIndex: "maLoaiNguoiDung",
         key: "maLoaiNguoiDung",
@@ -38,9 +45,5 @@ export const headerColums = [
         title: "Chức năng",
         dataIndex: "action",
         key: "action",
-    }
-
-
-
-
+    },
 ]

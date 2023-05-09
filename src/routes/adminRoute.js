@@ -2,7 +2,9 @@ import AdminLayout from "../Layout/AdminLayout";
 
 import AdminCoursePage from "../Page/AdminCoursePage/AdminCoursePage";
 import UpdateCourse from "../Page/AdminCoursePage/UpdateCourse";
+import AddUser from "../Page/AdminUserPage/AddUser";
 import AdminUsersPage from "../Page/AdminUserPage/AdminUserPage";
+import UpdateUser from "../Page/AdminUserPage/UpdateUser";
 import LoginPage from "../Page/LoginPage/LoginPage";
 import AddCourse from "../Page/AdminCoursePage/AddCourse";
 
@@ -33,6 +35,7 @@ export const adminRoute = [
         component: <LoginPage></LoginPage>
     },
 
+
     {
         url: "/admin-khoahoc",
         component: <AdminLayout Componet={AdminCoursePage}></AdminLayout>
@@ -43,6 +46,13 @@ export const adminRoute = [
         component: <AdminLayout Componet={AddCourse}></AdminLayout>
     },
 
+    {
+        url: "/admin-updateuser/:id",
+        component: <AdminLayout Componet={UpdateUser}></AdminLayout>
+    },
 
-
+    {
+        url: "/admin-adduser",
+        component: <AdminLayout Componet={AddUser}></AdminLayout>
+    }
 ]

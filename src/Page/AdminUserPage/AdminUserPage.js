@@ -142,7 +142,7 @@ export default function AdminUsersPage() {
             {localUserServ.get()?.maLoaiNguoiDung === 'GV' ? (
                 <div>
                     <NavLink to={'/admin-adduser'}>
-                        <Button type="primary" className='mb-3 bg-green-500'>Thêm khóa học</Button>
+                        <Button type="primary" className='mb-3 bg-green-500'>Thêm người dùng</Button>
                     </NavLink>
                 </div>
             ) : <></>}

@@ -17,6 +17,10 @@ export const adminServ = {
 
     getInfoUser: () => {
         return https.get('/api/QuanLyKhoaHoc/LayThongTinHocVienKhoaHoc')
+    },
+
+    postAddUser: (data) => {
+        return https.post('/api/QuanLyNguoiDung/ThemNguoiDung', data)
     }
 
 

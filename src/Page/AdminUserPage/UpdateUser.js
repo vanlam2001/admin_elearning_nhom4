@@ -161,39 +161,6 @@ export default function UpdateUser() {
                         <Option value="GV">Giáo viên</Option>
                     </Select>
                 </Form.Item>
-
-                <Form.Item
-                    label='Mã nhóm mới'
-                    name="maNhom"
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Không được để trống!',
-                        },
-
-                    ]}
-                >
-                    <Select
-                        allowClear
-                    >
-                        <Option value="GP01">GP01</Option>
-                        <Option value="GP02">GP02</Option>
-                        <Option value="GP03">GP03</Option>
-                        <Option value="GP04">GP04</Option>
-                        <Option value="GP05">GP05</Option>
-                        <Option value="GP06">GP06</Option>
-                        <Option value="GP07">GP07</Option>
-                        <Option value="GP08">GP08</Option>
-                        <Option value="GP09">GP09</Option>
-                        <Option value="GP10">GP10</Option>
-                        <Option value="GP11">GP11</Option>
-                        <Option value="GP12">GP12</Option>
-                        <Option value="GP13">GP13</Option>
-                        <Option value="GP14">GP14</Option>
-                        <Option value="GP15">GP15</Option>
-                    </Select>
-                </Form.Item>
-
                 {/* btn */}
                 <Form.Item
                     className='text-center'

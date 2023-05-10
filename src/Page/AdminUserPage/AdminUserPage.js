@@ -62,10 +62,7 @@ export default function AdminUsersPage() {
         else {
             fetchUserList(isGroupCode);
         }
-
-
     }, [isGroupCode]);
-
     // chức năng xóa
     const handleDeleteUser = (taiKhoan) => {
         adminServ.deleteUser(taiKhoan)
@@ -79,21 +76,16 @@ export default function AdminUsersPage() {
                 message.error(err.response.data);
             })
     }
-
     // change groupCode
     const handleChange = (value) => {
         setIsGroupCode(value)
     }
-
-
     let handleSearchOnchange = (keywords) => {
         let value = keywords.target.value;
-
         setSearchValue({
             search: value,
             isGroupCode: isGroupCode
         });
-
         if (value) {
             adminServ.getSearchUser(value, isGroupCode)
                 .then((res) => {
@@ -104,13 +96,10 @@ export default function AdminUsersPage() {
                     setUserList([])
                 })
         }
-
-
         else {
             fetchUserList(isGroupCode);
         }
     }
-
     const dataSource = userList?.map((item, index) => {
         return {
             key: index,
@@ -120,18 +109,15 @@ export default function AdminUsersPage() {
             soDt: item.soDt,
             maLoaiNguoiDung: item.maLoaiNguoiDung,
             action: (
-                <div className='flex justify-center'>
+                <div className='flex flex-col space-y-1 items-center justify-center sm:flex-row sm:space-y-0'>
                     <NavLink to={`/admin-updateuser/${item.taiKhoan}`}>
                         <button className='p-2 text-base text-white bg-amber-400 mx-1 rounded'>
                             <FaPencilAlt />
                         </button>
-
                     </NavLink>
-
                     <button onClick={() => { handleDeleteUser(item.taiKhoan) }} className='p-2 text-base text-white bg-red-500 mx-1 rounded'>
                         <FaTrashAlt />
                     </button>
-
                 </div>
             )
         }
@@ -146,7 +132,7 @@ export default function AdminUsersPage() {
                     </NavLink>
                 </div>
             ) : <></>}
-            <div className='mb-3 flex items-center justify-between'>
+            <div className='mb-3 flex flex-col items-start justify-between space-y-1 sm:flex-row sm:space-y-0'>
                 <Select defaultValue={isGroupCode}
                     style={{ width: 120 }}
                     onChange={handleChange}
@@ -167,17 +153,15 @@ export default function AdminUsersPage() {
                         { value: 'GP14', label: 'GP14' },
                         { value: 'GP15', label: 'GP15' },
                     ]}>
-
                 </Select>
                 <Search onChange={handleSearchOnchange}
                     defaultValue={paramsObj?.search}
                     placeholder='Tìm tài khoản'
                     style={{
                         width: 250,
+                        maxWidth: '100%'
                     }}></Search>
             </div>
-
-
             <Spinner></Spinner>
             <Table dataSource={dataSource} columns={headerColums} ></Table>
         </div>

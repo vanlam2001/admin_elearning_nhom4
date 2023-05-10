@@ -7,12 +7,14 @@ export const columns = [
         dataIndex: "maKhoaHoc",
         key: "maKhoaHoc",
         width: "8%",
+        responsive: ["sm"],
     },
     {
         title: "Hình ảnh",
         dataIndex: "hinhAnh",
         key: "hinhAnh",
         width: "10%",
+        responsive: ["md"],
         render: (url) => {
             return <img src={url} className="w-20" alt="" />
         }
@@ -28,24 +30,28 @@ export const columns = [
         dataIndex: "tenDanhMucKhoaHoc",
         key: "tenDanhMucKhoaHoc",
         width: "15%",
+        responsive: ["lg"],
     },
     {
         title: "Mô tả",
         dataIndex: "moTa",
         key: "moTa",
         width: "20%",
+        responsive: ["xl"],
     },
     {
         title: "Ngày tạo",
         dataIndex: "ngayTao",
         key: "ngayTao",
         width: "10%",
+        responsive: ["lg"],
     },
     {
         title: "Lượt xem",
         dataIndex: "luotXem",
         key: "luotXem",
         width: "7%",
+        responsive: ["md"],
     },
     {
         title: "Tuỳ chọn",

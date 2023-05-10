@@ -127,8 +127,8 @@ export default function UpdateCourse() {
                     span: 24,
                 }}
                 style={{
-                    maxWidth: 600,
-                    minWidth: 400,
+                    maxWidth: 450,
+                    width: '100%'
                 }}
                 initialValues={{
                     remember: true,

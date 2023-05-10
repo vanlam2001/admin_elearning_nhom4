@@ -25,4 +25,19 @@ export const courseService = {
     getSearchCourse: (value, groupCode) => {
         return https.get(`/api/QuanLyKhoaHoc/LayDanhSachKhoaHoc?tenKhoaHoc=${value}&MaNhom=${groupCode}`)
     },
+    postListUserUnregistered: (data) => {
+        return https.post('/api/QuanLyNguoiDung/LayDanhSachNguoiDungChuaGhiDanh', data)
+    },
+    postListUserRegistered: (data) => {
+        return https.post('/api/QuanLyNguoiDung/LayDanhSachHocVienKhoaHoc', data)
+    },
+    postListUserWaiting: (data) => {
+        return https.post('/api/QuanLyNguoiDung/LayDanhSachHocVienChoXetDuyet', data)
+    },
+    postAddUserToCourse: (data) => {
+        return https.post('/api/QuanLyKhoaHoc/GhiDanhKhoaHoc', data)
+    },
+    postDeleteUserFromCourse: (data) => {
+        return https.post('/api/QuanLyKhoaHoc/HuyGhiDanh', data)
+    },
 }

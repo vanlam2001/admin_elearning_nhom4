@@ -7,6 +7,7 @@ import AdminUsersPage from "../Page/AdminUserPage/AdminUserPage";
 import UpdateUser from "../Page/AdminUserPage/UpdateUser";
 import LoginPage from "../Page/LoginPage/LoginPage";
 import AddCourse from "../Page/AdminCoursePage/AddCourse";
+import DetailCourse from "../Page/AdminCoursePage/DetailCourse/DetailCourse";
 
 
 export const adminRoute = [
@@ -35,7 +36,6 @@ export const adminRoute = [
         component: <LoginPage></LoginPage>
     },
 
-
     {
         url: "/admin-khoahoc",
         component: <AdminLayout Componet={AdminCoursePage}></AdminLayout>
@@ -54,5 +54,10 @@ export const adminRoute = [
     {
         url: "/admin-adduser",
         component: <AdminLayout Componet={AddUser}></AdminLayout>
+    },
+
+    {
+        url: "/admin-detailcourse/:id",
+        component: <AdminLayout Componet={DetailCourse}></AdminLayout>
     }
 ]

@@ -41,7 +41,7 @@ const AdminLayout = ({ Componet }) => {
                 minHeight: '100vh',
             }}
         >
-            <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
+            <Sider breakpoint="md" collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
                 <div
                     style={{
                         height: 32,
@@ -54,12 +54,13 @@ const AdminLayout = ({ Componet }) => {
             <Layout className="site-layout">
                 <Header
                     style={{
-                        padding: '0 16px',
+                        padding: '16px',
                         background: colorBgContainer,
+                        height: 'auto',
                     }}
                 >
-                    <div className='flex items-center justify-between h-full'>
-                        <div className='text-xl font-bold text-[#000000e0]'>Admin Vlearning</div>
+                    <div className='flex flex-col sm:flex-row items-center justify-between h-full'>
+                        <div className='text-xl font-bold text-[#000000e0] sm:text-xl'>Admin Vlearning</div>
                         {isInfoLogin ? (
                             <Dropdown
                             menu={{
@@ -85,7 +86,7 @@ const AdminLayout = ({ Componet }) => {
                 >
                     <div
                         style={{
-                            padding: 24,
+                            padding: 10,
                             minHeight: 360,
                             background: colorBgContainer,
                         }}

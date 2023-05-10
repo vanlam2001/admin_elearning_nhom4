@@ -2,6 +2,7 @@ import { message, Input, Table } from 'antd';
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { courseService } from '../../../service/courseService';
+import { setLoadingOff, setLoadingOn } from '../../../toolkit/spinnerSlice';
 const { Search } = Input;
 
 export default function UserWaitingTable({idCourse}) {
@@ -49,11 +50,14 @@ export default function UserWaitingTable({idCourse}) {
         let data = {
             "maKhoaHoc": idCourse
         }
+        dispatch(setLoadingOn());
         courseService.postListUserWaiting(data)
         .then((res) => {
+            dispatch(setLoadingOff());
             setListUserWaiting(res.data)
         })
         .catch((err) => {
+            dispatch(setLoadingOff());
             console.log(err);
         });
     }

@@ -7,12 +7,13 @@ import { configureStore } from '@reduxjs/toolkit';
 import spinnerSlice from './toolkit/spinnerSlice';
 import { Provider } from 'react-redux';
 import courseSlice from './toolkit/courseSlice';
-
+import userSlice from './toolkit/userSlice';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const store = configureStore({
   reducer: {
     spinnerSlice: spinnerSlice,
     courseSlice: courseSlice,
+    userSlice: userSlice,
   },
 })
 root.render(

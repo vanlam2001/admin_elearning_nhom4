@@ -5,6 +5,7 @@ const initialState = {
     userInfo: localUserServ.get(),
     infoAccoutUser: {},
     isFormUpdate: false,
+    infoUserDetail: {},
 }
 
 const userSlice = createSlice({
@@ -25,9 +26,12 @@ const userSlice = createSlice({
 
         setFormUpdateUser: (state, action) => {
             state.isFormUpdate = action.payload
-        }
+        },
+        setInfoUserDetail: (state, action) => {
+            state.infoUserDetail = action.payload
+        },
     }
 })
 
-export const { setUserInfo, setLoginUser, setInfoAccountUser, setFormUpdateUser } = userSlice.actions
+export const { setUserInfo, setLoginUser, setInfoAccountUser, setFormUpdateUser, setInfoUserDetail } = userSlice.actions
 export default userSlice.reducer

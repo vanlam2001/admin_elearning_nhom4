@@ -1,9 +1,8 @@
-import { Button, Form, Input, Select, InputNumber, message } from 'antd';
-import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import { Button, Form, Input, Select, message } from 'antd';
+import { LockOutlined } from '@ant-design/icons';
 import { adminServ } from '../../service/adminService';
-import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { checkEmail, checkFullName, checkPassword, checkPhoneVietNam, checkUserName } from './ValidationForm';
+import { useNavigate } from 'react-router-dom';
+import { checkEmail, checkFullName, checkPassword, checkPhoneVietNam } from './ValidationForm';
 const { Option } = Select;
 export default function UpdateUser() {
     const navigate = useNavigate()

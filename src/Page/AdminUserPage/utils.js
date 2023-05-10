@@ -1,4 +1,5 @@
 import { Tag } from "antd"
+import { localUserServ } from "../../service/localService"
 
 export const headerColums = [
     {
@@ -42,5 +43,8 @@ export const headerColums = [
         title: "Chức năng",
         dataIndex: "action",
         key: "action",
+        hidden: localUserServ.get()?.maLoaiNguoiDung === 'GV' ? false : true,
     },
-]
+].filter((item) => {
+    return !item.hidden
+});

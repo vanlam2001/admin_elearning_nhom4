@@ -2,94 +2,93 @@ import { message, Input, Table } from 'antd';
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { courseService } from '../../../service/courseService';
+import { userService } from '../../../service/userService';
 import { setLoadingOff, setLoadingOn } from '../../../toolkit/spinnerSlice';
 const { Search } = Input;
 
-export default function UnregisteredTable({idCourse}) {
+export default function UnregisteredCourseTable({idUser}) {
     const dispatch = useDispatch();
-    const [listUserUnregistered, setListUserUnregistered] = useState([])
+    const [listCouserUnregistered, setListCouserUnregistered] = useState([])
     const [searchText, setSearchText] = useState('')
     const onSearch = (el) => {
         setSearchText(el.target.value.toLowerCase())
     };
     const columns = [
         {
-            title: "Tài khoản",
-            dataIndex: "taiKhoan",
+            title: "Mã khoá học",
+            dataIndex: "maKhoaHoc",
             key: "maKhoaHoc",
-            width: "25%",
-            filteredValue: [searchText],
-            onFilter: (value, record) => {
-            return record.taiKhoan.toLowerCase().includes(value)
-            }
-        },
-        {
-            title: "Họ tên",
-            dataIndex: "hoTen",
-            key: "hinhAnh",
             width: "25%",
             responsive: ["sm"],
         },
         {
+            title: "Tên khoá học",
+            dataIndex: "tenKhoaHoc",
+            key: "tenKhoaHoc",
+            width: "25%",
+            filteredValue: [searchText],
+            onFilter: (value, record) => {
+            return record.tenKhoaHoc.toLowerCase().includes(value)
+            }
+        },
+        {
             title: "Bí danh",
             dataIndex: "biDanh",
-            key: "hinhAnh",
+            key: "biDanh",
             width: "25%",
             responsive: ["md"],
         },
         {
             title: "Tuỳ chọn",
             dataIndex: "action",
-            key: "hinhAnh",
+            key: "action",
             width: "25%",
         },
     ];
 
-    const fetchListUser = () => {
-        let data = {
-            "maKhoaHoc": idCourse
-        }
-        dispatch(setLoadingOn());
-        courseService.postListUserUnregistered(data)
+    const fetchListCouser = () => {
+        dispatch(setLoadingOn())
+        userService.postListCourseUnregistered(idUser)
         .then((res) => {
-            dispatch(setLoadingOff());
-            setListUserUnregistered(res.data)
+            console.log("🚀 ~ file: UnregisteredCourseTable.js:56 ~ .then ~ res:", res)
+            dispatch(setLoadingOff())
+            setListCouserUnregistered(res.data)
         })
         .catch((err) => {
-            dispatch(setLoadingOff());
+            dispatch(setLoadingOff())
             console.log(err);
         });
     }
     useEffect(() => {
-        fetchListUser()
+        fetchListCouser()
         // eslint-disable-next-line
     }, [])
     
-    const handleAddUserToCourse = (taiKhoan) => {
+    const handleAddUserToCourse = (maKhoaHoc) => {
         let data = {
-            "maKhoaHoc": idCourse,
-            "taiKhoan": taiKhoan,
+            "maKhoaHoc": maKhoaHoc,
+            "taiKhoan": idUser,
         }
         courseService.postAddUserToCourse(data)
         .then((res) => {
             message.success(res.data)
-            fetchListUser()
+            fetchListCouser()
         })
         .catch((err) => {
             message.error(err.response.data)
             console.log(err);
         });
     }
-    const dataSource = listUserUnregistered?.map((item, index) => {
+    const dataSource = listCouserUnregistered?.map((item, index) => {
             return {
                 key: index,
-                taiKhoan: item.taiKhoan,
-                hoTen: item.hoTen,
+                maKhoaHoc: item.maKhoaHoc,
+                tenKhoaHoc: item.tenKhoaHoc,
                 biDanh: item.biDanh,
                 action: (
                     <div>
                         <button
-                        onClick={() => {handleAddUserToCourse(item.taiKhoan)}}
+                        onClick={() => {handleAddUserToCourse(item.maKhoaHoc)}}
                         className='p-2 text-base text-white bg-green-500 rounded'
                         >Ghi danh</button>
                     </div>
@@ -100,7 +99,7 @@ export default function UnregisteredTable({idCourse}) {
     <div>
         <Search
         className='mb-1'
-        placeholder="Nhập tài khoản"
+        placeholder="Nhập tên khóa học"
         onChange={onSearch}
         style={{
             width: 180,

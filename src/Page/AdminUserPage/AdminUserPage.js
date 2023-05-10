@@ -9,6 +9,8 @@ import { NavLink, useSearchParams } from 'react-router-dom';
 import { FaPencilAlt, FaTrashAlt } from 'react-icons/fa';
 import qs from "qs";
 import { localUserServ } from '../../service/localService';
+import { useNavigate } from 'react-router-dom';
+import { setInfoUserDetail } from '../../toolkit/userSlice';
 
 const { Search } = Input;
 
@@ -18,13 +20,13 @@ export default function AdminUsersPage() {
     const stringSearch = window.location.search.substring(1);
     let paramsObj = qs.parse(stringSearch)
     let dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const [searchValue, setSearchValue] = useSearchParams();
     const [isGroupCode, setIsGroupCode] = useState(() => {
         if (paramsObj.isGroupCode) {
             return paramsObj.isGroupCode;
         }
-
         else {
             return 'GP01'
         }
@@ -35,12 +37,10 @@ export default function AdminUsersPage() {
     let fetchUserList = (isGroupCode) => {
         dispatch(setLoadingOn())
         adminServ.getUserList(isGroupCode)
-
             .then((res) => {
                 dispatch(setLoadingOff());
                 setUserList(res.data);
             })
-
             .catch((err) => {
                 console.log(err);
             })
@@ -109,15 +109,26 @@ export default function AdminUsersPage() {
             soDt: item.soDt,
             maLoaiNguoiDung: item.maLoaiNguoiDung,
             action: (
-                <div className='flex flex-col space-y-1 items-center justify-center sm:flex-row sm:space-y-0'>
-                    <NavLink to={`/admin-updateuser/${item.taiKhoan}`}>
-                        <button className='p-2 text-base text-white bg-amber-400 mx-1 rounded'>
-                            <FaPencilAlt />
+                <div>
+                    <div className='flex flex-col space-y-1 items-center justify-center sm:flex-row sm:space-y-0'>
+                        <NavLink to={`/admin-updateuser/${item.taiKhoan}`}>
+                            <button className='p-2 text-base text-white bg-amber-400 mx-1 rounded'>
+                                <FaPencilAlt />
+                            </button>
+                        </NavLink>
+                        <button onClick={() => { handleDeleteUser(item.taiKhoan) }} className='p-2 text-base text-white bg-red-500 mx-1 rounded'>
+                            <FaTrashAlt />
                         </button>
-                    </NavLink>
-                    <button onClick={() => { handleDeleteUser(item.taiKhoan) }} className='p-2 text-base text-white bg-red-500 mx-1 rounded'>
-                        <FaTrashAlt />
-                    </button>
+                    </div>
+                    <div className='flex justify-center'>
+                        <button onClick={() => {
+                        dispatch(setInfoUserDetail({...item, maNhom: isGroupCode}))
+                        navigate(`/admin-detailuser/${item.taiKhoan}`)
+                        }}
+                        className='p-1 text-sm mt-1 text-white bg-blue-500 mx-1 rounded'>
+                        Xem thêm
+                        </button>
+                    </div>
                 </div>
             )
         }

@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
-import { Button, Form, Input, Select, InputNumber, message } from 'antd';
-import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import React from 'react'
+import { Button, Form, Input, Select, message } from 'antd';
+import { LockOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import { checkEmail, checkFullName, checkPassword, checkPhoneVietNam, checkUserName } from './ValidationForm';
 import { adminServ } from '../../service/adminService';

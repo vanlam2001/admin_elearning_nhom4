@@ -5,7 +5,10 @@ import { courseService } from '../../../service/courseService';
 import UnregisteredTable from './UnregisteredTable';
 import RegisteredTable from './RegisteredTable';
 import UserWaitingTable from './UserWaitingTable';
+import { useDispatch } from 'react-redux';
+import { setLoadingOff, setLoadingOn } from '../../../toolkit/spinnerSlice';
 export default function DetailCourse() {
+    const dispatch = useDispatch();
     const params = useParams();
     const [infoCourse, setinfoCourse] = useState({})
     const onChange = (key) => {
@@ -29,11 +32,14 @@ export default function DetailCourse() {
         },
     ];
     useEffect(() => {
+        dispatch(setLoadingOn());
         courseService.getInfoCourse(params.id)
         .then((res) => {
+            dispatch(setLoadingOff());
             setinfoCourse(res.data)
         })
         .catch((err) => {
+            dispatch(setLoadingOff());
             console.log(err);
         });
     }, [])

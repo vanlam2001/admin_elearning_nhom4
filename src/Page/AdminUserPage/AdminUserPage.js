@@ -122,11 +122,11 @@ export default function AdminUsersPage() {
                     </div>
                     <div className='flex justify-center'>
                         <button onClick={() => {
-                        dispatch(setInfoUserDetail({...item, maNhom: isGroupCode}))
-                        navigate(`/admin-detailuser/${item.taiKhoan}`)
+                            dispatch(setInfoUserDetail({ ...item, maNhom: isGroupCode }))
+                            navigate(`/admin-detailuser/${item.taiKhoan}`)
                         }}
-                        className='p-1 text-sm mt-1 text-white bg-blue-500 mx-1 rounded'>
-                        Xem thêm
+                            className='p-1 text-sm mt-1 text-white bg-blue-500 mx-1 rounded'>
+                            Xem thêm
                         </button>
                     </div>
                 </div>

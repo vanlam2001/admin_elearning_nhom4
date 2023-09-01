@@ -20,15 +20,15 @@ const menu = [
 const items = [
     {
         key: "1",
-        label: 
-        <div
-        onClick={() => {
-            localUserServ.remove();
-            window.location.href = '/';
-        }}
-        >Đăng xuất</div>,
+        label:
+            <div
+                onClick={() => {
+                    localUserServ.remove();
+                    window.location.href = '/';
+                }}
+            >Đăng xuất</div>,
     },
-  ];
+];
 const AdminLayout = ({ Componet }) => {
     const isInfoLogin = localUserServ.get();
     const [collapsed, setCollapsed] = useState(false);
@@ -63,13 +63,13 @@ const AdminLayout = ({ Componet }) => {
                         <div className='text-xl font-bold text-[#000000e0] sm:text-xl'>Admin Vlearning</div>
                         {isInfoLogin ? (
                             <Dropdown
-                            menu={{
-                                items,
-                            }}
-                            placement="bottom"
+                                menu={{
+                                    items,
+                                }}
+                                placement="bottom"
                             >
                                 <Button>Hello, {isInfoLogin.hoTen}</Button>
-                            </Dropdown> 
+                            </Dropdown>
                         ) : (
                             <div>
                                 <NavLink to={'/login'}>

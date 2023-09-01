@@ -97,39 +97,42 @@ export default function AdminCoursePage() {
 
 
     const dataSource = listCourse?.map((item, index) => {
+        // Check if item.moTa is null or undefined, and handle it
+        const truncatedMoTa = item.moTa?.substr(0, 70) || '';
+
         return {
             key: index,
             maKhoaHoc: item.maKhoaHoc,
             hinhAnh: item.hinhAnh,
             tenKhoaHoc: item.tenKhoaHoc,
             tenDanhMucKhoaHoc: item.danhMucKhoaHoc.tenDanhMucKhoaHoc,
-            moTa: item.moTa.substr(0, 70) + '...',
+            moTa: truncatedMoTa + '...', // Use truncatedMoTa
             ngayTao: item.ngayTao,
             luotXem: item.luotXem,
             action: (
                 <div>
                     <div className='flex flex-col space-y-1 items-center justify-center sm:flex-row sm:space-y-0'>
                         <NavLink to={`/admin-updatecourse/${item.maKhoaHoc}`}>
-                        <button className='p-2 text-base text-white bg-amber-400 mx-1 rounded'>
-                            <FaPencilAlt/>
-                        </button>
+                            <button className='p-2 text-base text-white bg-amber-400 mx-1 rounded'>
+                                <FaPencilAlt />
+                            </button>
                         </NavLink>
-                        <button onClick={() => {handleDeleteCourse(item.maKhoaHoc)}} className='p-2 text-base text-white bg-red-500 mx-1 rounded'>
-                        <FaTrashAlt/>
+                        <button onClick={() => { handleDeleteCourse(item.maKhoaHoc) }} className='p-2 text-base text-white bg-red-500 mx-1 rounded'>
+                            <FaTrashAlt />
                         </button>
                     </div>
                     <div className='flex justify-center'>
                         <NavLink to={`/admin-detailcourse/${item.maKhoaHoc}`}>
-                        <button className='p-1 text-sm mt-1 text-white bg-blue-500 mx-1 rounded'>
-                            Xem thêm
-                        </button>
+                            <button className='p-1 text-sm mt-1 text-white bg-blue-500 mx-1 rounded'>
+                                Xem thêm
+                            </button>
                         </NavLink>
                     </div>
-                    </div>
+                </div>
             ),
+        };
+    });
 
-        }
-    })
 
     return (
         <div>
